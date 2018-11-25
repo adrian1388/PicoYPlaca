@@ -1,0 +1,33 @@
+{
+  "name": "picoyplaca",
+  "version": "0.0.1",
+  "description": "sample of pico y placa",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrian1388/PicoYPlaca.git"
+  },
+  "keywords": [
+    "pico",
+    "y",
+    "placa",
+    "mocha",
+    "test"
+  ],
+  "author": "Hector Mosquera",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adrian1388/PicoYPlaca/issues"
+  },
+  "homepage": "https://github.com/adrian1388/PicoYPlaca#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  }
+}

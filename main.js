@@ -38,12 +38,16 @@ const picoYPlaca = (plate, dateString, time) => {
 				finish: '19:30'
 			}
 		},
-		dateConcat = '01/01/2011 ',
-		lastPlateNumber = Number(plate.slice(-1));
+		dateConcat = '01/01/2011 ';
 
 	// Plate is any string but if the last is a number it can be restricted,
 	// otherwise it can be on road.
-
+	// Plate validation.
+	if (!plate) {
+		return "Invalid Plate";
+	}
+	
+	const lastPlateNumber = Number(plate.slice(-1));
 	// Date validation.
 	if (date.toString().indexOf("Invalid Date") >= 0) {
 		return "Invalid Date";
@@ -106,3 +110,5 @@ function submitcheck(element)
 	document.getElementById("result").innerHTML = result;
 	return false;
 }
+
+exports.picoYPlaca = picoYPlaca;
