@@ -2,7 +2,7 @@
  * PicoYPlaca Function
  * Developer: Héctor Mosquera
  * 
- * Detects if the Plate number insertes as a parameter can be on the road or not
+ * Detects if the Plate number inserted as a parameter can be on the roads of Quito or not
  * in the date and time inserted as parameters too.
  * 
  * @param plate The full plate number
@@ -40,36 +40,60 @@ const picoYPlaca = (plate, dateString, time) => {
 		},
 		dateConcat = '01/01/2011 ',
 		lastPlateNumber = Number(plate.slice(-1));
-	
+
+	// Plate is any string but if the last is a number it can be restricted,
+	// otherwise it can be on road.
+
+	// Date validation.
+	if (date.toString().indexOf("Invalid Date") >= 0) {
+		return "Invalid Date";
+	}
+
+	/**
+	 * If the last number is on the day according to the next list,
+	 * and the time is inside the ranges [7:00, 9:30], [16:00, 19:30]
+	 * then the plate is restricted to be o roads.
+	 * Otherwise the plate is not restricted.
+	 *
+	 * List:
+	 * monday: 1, 2
+	 * tuesday: 3, 4
+	 * wednesday: 5, 6
+	 * thursday: 7, 8
+	 * friday: 9, 0
+	 */
 	if (
-		dayComparer[date.getDay()] && dayComparer[date.getDay()].includes(lastPlateNumber) 
-		
-	) {
-		if (
+		// Comparison of days
+		dayComparer[date.getDay()] && dayComparer[date.getDay()].includes(lastPlateNumber) &&
+		(
+			// Comparison of time inside of th ranges
 			(
+				// Comparison of time inserted against morning's range
 				new Date(dateConcat + time) > new Date(dateConcat + timeComparer.morning.start) &&
 				new Date(dateConcat + time) < new Date(dateConcat + timeComparer.morning.finish)
 			) ||
 			(
+				// Comparison of time inserted against afternoon and night's range
 				new Date(dateConcat + time) > new Date(dateConcat + timeComparer.night.start) &&
 				new Date(dateConcat + time) < new Date(dateConcat + timeComparer.night.finish)
 			)
-		) {
-			console.info('time true');
-		}else{
-			console.info('time else');
-		}
-		console.info('restrinction');
-		return 'restrinction';
+		)
+	) {
+		return 'Restriction';
 	} else {
-		console.info('no restrinction');
-		return 'no restrinction';
+		return 'No restriction';
 	}
-	
-	//console.info(time, timeComparer, new Date('01/01/2011 ' + time));
 }
 
-
+/**
+ * submitcheck Function
+ * Developer: Héctor Mosquera
+ * 
+ * Get the values from the form nd calls picoYPlaca function.
+ * 
+ * @param element the form
+ * @return false.
+ */
 function submitcheck(element)
 {
 	let result = picoYPlaca(
@@ -78,6 +102,7 @@ function submitcheck(element)
 		element.elements.time.value
 	);
 	
-	
+	// Adding the result of picoYPlaca function to the DOM
+	document.getElementById("result").innerHTML = result;
 	return false;
 }
