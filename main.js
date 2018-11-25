@@ -40,8 +40,9 @@ const picoYPlaca = (plate, dateString, time) => {
 		},
 		dateConcat = '01/01/2011 ';
 
-	// Plate is any string but if the last is a number it can be restricted,
+	// Plate is any string but if the last character is a number it can be restricted or not,
 	// otherwise it can be on road.
+
 	// Plate validation.
 	if (!plate) {
 		return "Invalid Plate";
@@ -56,7 +57,7 @@ const picoYPlaca = (plate, dateString, time) => {
 	/**
 	 * If the last number is on the day according to the next list,
 	 * and the time is inside the ranges [7:00, 9:30], [16:00, 19:30]
-	 * then the plate is restricted to be o roads.
+	 * then the plate is restricted to be on roads.
 	 * Otherwise the plate is not restricted.
 	 *
 	 * List:
