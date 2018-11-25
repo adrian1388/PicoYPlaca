@@ -94,7 +94,7 @@ const picoYPlaca = (plate, dateString, time) => {
  * submitcheck Function
  * Developer: Héctor Mosquera
  * 
- * Get the values from the form nd calls picoYPlaca function.
+ * Get the values from the form and calls picoYPlaca function.
  * 
  * @param element the form
  * @return false.
@@ -112,4 +112,5 @@ function submitcheck(element)
 	return false;
 }
 
+//export for testing
 exports.picoYPlaca = picoYPlaca;
